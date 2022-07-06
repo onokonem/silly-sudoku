@@ -1,0 +1,126 @@
+swagger: '2.0'
+
+consumes:
+  - application/json
+produces:
+  - application/json
+info:
+  version: 4.0.0
+  title: Sudoku server
+  description: |
+    # Sudoku generation and verification server
+    ## List of all custom errors
+    First number is HTTP Status code, second is value of "code" field in returned JSON object, text description may or may not match "message" field in returned JSON object.
+    - 400.700: Provided solution does not match to the original sudoku.
+    - 400.701: Original field could not be decrypted 
+    - 422.702: Solution is invalid
+basePath: /
+schemes:
+  - http
+  - https
+
+paths:
+  /get:
+    get:
+      tags: ["get"]
+      operationId: getSudoku
+      parameters:
+        - name: size
+          in: query
+          type: string
+          enum: ["common", "big", "huge"]
+          default: "common"
+        - name: difficulty
+          in: query
+          type: string
+          enum: ["easy", "heavy", "nightmare"]
+          default: "easy"
+      responses:
+        200:
+          description: sudoku to be solved
+          schema:
+            $ref: "#/definitions/sudoku"
+        default:
+          description: generic error response
+          schema:
+            $ref: "#/definitions/error"
+  /check:
+    post:
+      tags: ["check"]
+      operationId: checkSudoku
+      parameters:
+        - name: toCheck
+          in: body
+          schema:
+            $ref: "#/definitions/toCheck"
+      responses:
+        200:
+          description: validation result
+          schema:
+            $ref: "#/definitions/result"
+        default:
+          description: generic error response
+          schema:
+            $ref: "#/definitions/error"
+
+definitions:
+  row:
+    type: array
+    items:
+      type: integer
+      format: int32
+      minItems: 9
+      maxItems: 25
+
+  field:
+    type: array
+    items:
+      $ref: "#/definitions/row"
+      minItems: 9
+      maxItems: 25
+
+  original:
+    type: string
+    description: encrypted sudoku original returned by the `/get` and to be used later with `/check`
+
+
+  sudoku:
+    type: object
+    properties:
+      field:
+        $ref: "#/definitions/field"
+      original:
+        $ref: "#/definitions/original"
+    required:
+      - field
+      - original
+
+  toCheck:
+    type: object
+    properties:
+      field:
+        $ref: "#/definitions/field"
+      original:
+        $ref: "#/definitions/original"
+    required:
+      - field
+      - original
+
+  result:
+    type: object
+    properties:
+      sameAsOriginal:
+        type: boolean
+
+  error:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        description: Either same as HTTP Status Code OR >= 600.
+        type: integer
+        format: int32
+      message:
+        type: string
