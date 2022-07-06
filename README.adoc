@@ -1,0 +1,47 @@
+= silly-sudoku image:https://godoc.org/github.com/onokonem/silly-sudoku?status.svg["GoDoc",link="http://godoc.org/github.com/onokonem/silly-sudoku"] image:https://github.com/Djarvur/go-cryptowrap/workflows/Test/badge.svg?branch=master["Build Status"] image:https://coveralls.io/repos/onokonem/silly-sudoku/badge.svg?branch=main&service=github["Coverage Status",link="https://coveralls.io/github/onokonem/silly-sudoku?branch=main"]
+Daniel Podolsky
+:toc:
+
+== How it works
+
+. You are requesting the sudoku to solve, providing size and difficulty level.
+.. You are getting:
+... The field with empty cells set to 0.
+... The encrypted original field, the solution.
+. As soon as you've solved the sudoku you are sending your solution and the original field you've got on the step 1 back to the server to check.
+.. Server will validate your solution and return your one of the answers:
+... Solved
+... Solved and matched to the original but solution is different from the original
+... Solution is invalid
+... Provided solution does not match to the original sudoku.
+... Original field could not be decrypted (see <<Encryption>>)
+
+== Rules
+
+As described in https://en.wikipedia.org/wiki/Sudoku[WiKi].
+
+Note: the generated sudoku does not necessary meet the "single solution" requirement.
+
+== Encryption
+
+The encryption key will be generated on each server restart.
+
+As a result you will not be able to validate any solution were generated before the last server restart: the encryption key will not match.
+
+== Protocol
+
+Described in the link:swagger.yml[swagger.yml].
+
+=== Generate code from spec
+
+Install https://goswagger.io/[go-swagger] and generate the code:
+
+```
+swagger generate server -f swagger.yml -t ./internal/oapi --main-package=../../../cmd/server --strict-responders
+```
+
+== How to compile
+
+```
+go build ./cmd/server
+```
