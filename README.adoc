@@ -107,7 +107,7 @@ Send the solution back to the server:
 
 [source]
 ----
-curl -H "Content-Type: application/json" -d @sudoku.json http://127.0.0.1:8080/check
+curl -v -H "Content-Type: application/json" -d @sudoku.json http://127.0.0.1:8080/check
 ----
 
 and...
