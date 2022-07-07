@@ -100,7 +100,7 @@ You have to replace all the `0` to the proper numbers.
 Send the solution back to the server:
 
 ```
-curl -X POST -H "Content-Type: application/json" -d @sudoku.json http://127.0.0.1:8080/check
+curl -H "Content-Type: application/json" -d @sudoku.json http://127.0.0.1:8080/check
 ```
 
 and...
