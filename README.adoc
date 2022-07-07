@@ -1,4 +1,4 @@
-= silly-sudoku image:https://github.com/onokonem/silly-sudoku/workflows/Test/badge.svg?branch=master["Build Status"] image:https://coveralls.io/repos/github/onokonem/silly-sudoku/badge.svg?branch=main["Coverage Status",link="https://coveralls.io/github/onokonem/silly-sudoku?branch=main"]
+= silly-sudoku image:https://github.com/onokonem/silly-sudoku/workflows/Test/badge.svg?branch=main["Build Status"] image:https://coveralls.io/repos/github/onokonem/silly-sudoku/badge.svg?branch=main["Coverage Status",link="https://coveralls.io/github/onokonem/silly-sudoku?branch=main"]
 Daniel Podolsky
 :toc:
 
