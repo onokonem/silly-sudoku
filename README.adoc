@@ -36,15 +36,17 @@ Described in the link:swagger.yml[swagger.yml].
 
 Install https://goswagger.io/[go-swagger] and generate the code:
 
-```
+[source]
+----
 swagger generate server -f swagger.yml -t ./internal/oapi --main-package=../../../cmd/server --strict-responders
-```
+----
 
 == How to compile
 
-```
+[source]
+----
 go build ./cmd/server
-```
+----
 
 == How to play
 
@@ -56,28 +58,32 @@ So let's do it in old school manner.
 
 === Compile and start the server
 
-```
+[source]
+----
 go build ./cmd/server
 ./server --scheme=http --host 0.0.0.0 --port 8080
-```
+----
 
 === Get the sudoku
 
-```
+[source]
+----
 curl -v -o sudoku.json http://127.0.0.1:8080/get
-```
+----
 
 Your sudoku will be in the `sudoku.json` file. The file will be something like this:
 
-```json
+[source,json]
+----
 {"field":[[9,0,0,0,4,0,0,0,5],[8,0,0,0,0,9,0,0,4],[0,4,0,0,0,0,9,0,3],[0,0,0,0,8,0,6,0,0],[0,0,0,0,0,0,0,0,0],[0,0,8,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,1,7,0,0,0,0],[0,0,0,0,0,0,0,0,0]],"original":"{\"Secure\":{\"IV\":\"UrHOfhoFSg/Z3v6pmYAt8A==\",\"Payload\":\"aXXA8ZXzQAVZ06Yk8miPGflv6dXI6suLjo5TL25BNw8oz6nER7NlbuJtj7yTexGp0jd8/Kar6UXfBBqSL+NtXmYl/aPZUmJ7ocd0JVnvtEMT/9Rfya12H4KAdwwI9LpNAz+juc5lgcDQWOKIDX6iHeIl9jy/JZmk5nughfFf6guXzNraMm7r8eOf/V58fiqpJh4YK0EehBSROgKcZsPt2HnMMeQD768z+F5YRRHCRfV9Ye8KqWmkSjFAfp8Ffx2Vlk8Y1R9gw6zDUPbCTCoMEF34pVLe+hYINfilWJ4F+9LRZE5WtIGBL7lvVb2iBmZkGfCu0r75QcTia+1fazUM0VyL2iFOb1y15IvdgofxyY724ZPRWH6A8uR+YbTpy+IkbtaJvW6B39uMsG4T30oV68OHRp5XwLNMkZGPIpkSeCYxBMEaS58qR/l/K66L4tPb7RHQnJq+KLLGZQnObSu++swb0q22469sCYtjBGzp/dO0hdTb2OINUR0afVWYplE0iObeTmfBs7BOwaNwM8rbWXt6dYvkpUEzFLf3LwpvYX3QqKlNWrtu+6lRkLKUljxiun3Osd9V5SiedPkFKE9vP258jXe0r7yWfZstxxrlm6Vcs35KuubPZCAIqdI0wXRrDUCxXWNAQrldGO6POu0nTQ==\"}}"}
-```
+----
 
 === Solve the sudoku
 
 To make it easier we can reformat the file like this:
 
-```json
+[source,json]
+----
 {"field":[
   [9,0,0,0,4,0,0,0,5],
   [8,0,0,0,0,9,0,0,4],
@@ -89,7 +95,7 @@ To make it easier we can reformat the file like this:
   [0,0,0,1,7,0,0,0,0],
   [0,0,0,0,0,0,0,0,0]
 ],"original":"{\"Secure\":{\"IV\":\"UrHOfhoFSg/Z3v6pmYAt8A==\",\"Payload\":\"aXXA8ZXzQAVZ06Yk8miPGflv6dXI6suLjo5TL25BNw8oz6nER7NlbuJtj7yTexGp0jd8/Kar6UXfBBqSL+NtXmYl/aPZUmJ7ocd0JVnvtEMT/9Rfya12H4KAdwwI9LpNAz+juc5lgcDQWOKIDX6iHeIl9jy/JZmk5nughfFf6guXzNraMm7r8eOf/V58fiqpJh4YK0EehBSROgKcZsPt2HnMMeQD768z+F5YRRHCRfV9Ye8KqWmkSjFAfp8Ffx2Vlk8Y1R9gw6zDUPbCTCoMEF34pVLe+hYINfilWJ4F+9LRZE5WtIGBL7lvVb2iBmZkGfCu0r75QcTia+1fazUM0VyL2iFOb1y15IvdgofxyY724ZPRWH6A8uR+YbTpy+IkbtaJvW6B39uMsG4T30oV68OHRp5XwLNMkZGPIpkSeCYxBMEaS58qR/l/K66L4tPb7RHQnJq+KLLGZQnObSu++swb0q22469sCYtjBGzp/dO0hdTb2OINUR0afVWYplE0iObeTmfBs7BOwaNwM8rbWXt6dYvkpUEzFLf3LwpvYX3QqKlNWrtu+6lRkLKUljxiun3Osd9V5SiedPkFKE9vP258jXe0r7yWfZstxxrlm6Vcs35KuubPZCAIqdI0wXRrDUCxXWNAQrldGO6POu0nTQ==\"}}"}
-```
+----
 
 Looks like a real sudoku field, huh? Keep the `original` part intact!
 
@@ -99,15 +105,17 @@ You have to replace all the `0` to the proper numbers.
 
 Send the solution back to the server:
 
-```
+[source]
+----
 curl -H "Content-Type: application/json" -d @sudoku.json http://127.0.0.1:8080/check
-```
+----
 
 and...
 
 I've got
 
-```
+[source]
+----
 > POST /check HTTP/1.1
 > Host: 127.0.0.1:8080
 > User-Agent: curl/7.79.1
@@ -122,13 +130,14 @@ I've got
 < Content-Length: 43
 <
 {"code":702,"message":"validation failed"}
-```
+----
 
 Looks like I did not solve the sudoku properly, there is
 
-```
+[source]
+----
 HTTP/1.1 422 Unprocessable Entity
-```
+----
 
 For the proper solution there will be `200 OK`.
 
