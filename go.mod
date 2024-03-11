@@ -6,7 +6,7 @@ require (
 	github.com/Djarvur/cryptowrap v0.3.1
 	github.com/go-openapi/errors v0.22.0
 	github.com/go-openapi/loads v0.22.0
-	github.com/go-openapi/runtime v0.26.0
+	github.com/go-openapi/runtime v0.28.0
 	github.com/go-openapi/spec v0.21.0
 	github.com/go-openapi/strfmt v0.23.0
 	github.com/go-openapi/swag v0.23.0
@@ -34,6 +34,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/ugorji/go/codec v1.2.7 // indirect
 	go.mongodb.org/mongo-driver v1.14.0 // indirect
-	golang.org/x/sys v0.14.0 // indirect
+	golang.org/x/sync v0.6.0 // indirect
+	golang.org/x/sys v0.17.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
