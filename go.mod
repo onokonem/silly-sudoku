@@ -9,7 +9,7 @@ require (
 	github.com/go-openapi/runtime v0.26.0
 	github.com/go-openapi/spec v0.20.15
 	github.com/go-openapi/strfmt v0.22.2
-	github.com/go-openapi/swag v0.22.10
+	github.com/go-openapi/swag v0.23.0
 	github.com/go-openapi/validate v0.23.2
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/openlyinc/pointy v1.1.2
