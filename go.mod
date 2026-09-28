@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	github.com/Djarvur/cryptowrap v0.3.1
-	github.com/go-openapi/errors v0.22.8
+	github.com/go-openapi/errors v0.22.9
 	github.com/go-openapi/loads v0.25.3
 	github.com/go-openapi/runtime v0.33.2
 	github.com/go-openapi/spec v1.0.1
